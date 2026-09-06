@@ -1,4 +1,4 @@
-/* Precompiled from index.html — do not edit by hand. Edit the source inside index.html and re-run: node scripts/build.js */
+/* Compiled from src/index.jsx — do not edit by hand. Edit src/index.jsx and re-run: node scripts/build.js */
 const {
   useState,
   useEffect,

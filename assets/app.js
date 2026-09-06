@@ -1,4 +1,4 @@
-/* Precompiled from app.html — do not edit by hand. Edit the source inside app.html and re-run: node scripts/build.js */
+/* Compiled from src/app.jsx — do not edit by hand. Edit src/app.jsx and re-run: node scripts/build.js */
 const {
   useState,
   useEffect,
