@@ -6,7 +6,8 @@
 //   1. Edit src/<page>.jsx (app logic) or the static parts of <page>.html
 //      (everything OUTSIDE the BOCXY-APP markers).
 //   2. Run: node scripts/build.js [index|app|pitch]
-//   3. Commit assets/, src/ and *.html, push, redeploy.
+//   3. If you added/removed CSS classes, also run: node scripts/build-css.js
+//   4. Commit assets/, src/ and *.html, push, redeploy.
 // Usage: node scripts/build.js [index app pitch]
 const fs = require('fs');
 const vm = require('vm');
