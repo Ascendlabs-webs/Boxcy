@@ -66,8 +66,10 @@ for (const p of pages) {
   const htmlPath = path.join(root, p.html);
   let html = fs.readFileSync(htmlPath, 'utf8');
   const marked = /<!--BOCXY-APP-START-->[\s\S]*?<!--BOCXY-APP-END-->/;
+  // NOTE: replacement MUST be a function — the region is minified code full of
+  // `$&`/`$'`/`$`` sequences which String.replace would otherwise substitute.
   if (marked.test(html)) {
-    html = html.replace(marked, region);
+    html = html.replace(marked, () => region);
     console.log(p.html + ': refreshed inlined region');
   } else {
     // First run: replace the three external script tags with the region.
@@ -76,10 +78,19 @@ for (const p of pages) {
       '<script src="./vendor/react-dom.production.min.js" crossorigin></script>\n' +
       '<script src="./' + p.js + '"></script>';
     if (!html.includes(tags)) { console.error(p.html + ': expected script tags not found, aborting'); process.exit(1); }
-    html = html.replace(tags, region);
+    html = html.replace(tags, () => region);
     console.log(p.html + ': external scripts replaced with inlined region');
   }
   fs.writeFileSync(htmlPath, html);
-  console.log(p.base + ': src ' + srcCode.length + ' -> compiled ' + compiled.length + ' -> inlined');
+  // Self-verify: the inlined copy must byte-match the compiled output.
+  const check = fs.readFileSync(htmlPath, 'utf8');
+  const block = check.match(/\/\* compiled src\/.*? \*\//);
+  const want = '/* compiled src/' + p.src + ' (inlined for reliability) */\n' + compiled + '\n</script>';
+  if (!check.includes(want)) {
+    console.error(p.html + ': VERIFY FAIL — inlined copy differs from compiled output, aborting');
+    process.exit(1);
+  }
+  void block;
+  console.log(p.base + ': src ' + srcCode.length + ' -> compiled ' + compiled.length + ' -> inlined + verified');
 }
 console.log('BUILD OK');
