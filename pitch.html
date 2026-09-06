@@ -1470,6 +1470,7 @@ const SOLUTIONS_DATA = {
     desc: "Bocxy's customised business solutions give you a competitive edge that off-the-shelf software simply can't match.",
     pillars: [
       { t: "Perfect Workflow Alignment", d: "We start by deeply understanding your business model, current pain points, and future goals, ensuring every line of code addresses a real need." },
+      { t: "Discovery & Consultation", d: "We start by deeply understanding your business model, current pain points, and future goals, ensuring every line of code addresses a real need." },
       { t: "Strategic Design & Development", d: "Our expert team leverages cutting-edge technology and best practices to design intuitive, robust, and scalable solutions." },
       { t: "Seamless Integration", d: "We ensure your new custom software integrates flawlessly with any existing third-party tools or systems you rely on." },
       { t: "Ongoing Support & Evolution", d: "Our partnership doesn't end at launch. We provide continuous support, maintenance, and iterative development." },
@@ -1478,14 +1479,17 @@ const SOLUTIONS_DATA = {
     ]
   },
   future: {
-    name: "Future of Aesthetic Clinics",
-    kicker: "Our R&D direction",
-    tagline: "Where aesthetic clinic technology is going — and where Bocxy is investing.",
-    desc: "Bocxy is investing in the future of aesthetic clinics: deeper clinical AI, more intelligent patient journeys, and the next generation of practice management for the modern aesthetic practitioner.",
+    name: "The Future of Aesthetic Clinics: Why Digital Management Software is a Game-Changer",
+    kicker: "Whitepaper · Our R&D direction",
+    tagline: "The aesthetic industry in India is expanding rapidly — digital clinic management software is reshaping how clinics compete and grow.",
+    desc: "As clinics expand, so do the challenges — managing patient records, scheduling appointments, processing payments, and ensuring compliance. This is where aesthetic clinic management software becomes a true game-changer.",
     pillars: [
-      { t: "Clinical AI", d: "Deeper insights from patient data to support better outcomes." },
-      { t: "Intelligent patient journeys", d: "Automated touchpoints that keep patients engaged across the full lifecycle." },
-      { t: "Next-generation practice management", d: "Built for the modern aesthetic practitioner." }
+      { t: "Streamlined Appointment Scheduling", d: "Traditional scheduling often causes double bookings, miscommunication, and no-shows. With digital clinic scheduling software, appointments are automated, reminders are sent instantly, and clients enjoy a seamless booking experience — leading to higher satisfaction and revenue." },
+      { t: "Centralized Patient Records & History", d: "Aesthetic treatments require accurate records. A digital clinic management system securely stores consultation notes, treatment plans, and medical histories in one place — ensuring compliance while allowing staff to deliver personalized services efficiently." },
+      { t: "Enhanced Customer Experience", d: "Today's clients expect convenience. With online booking, automated follow-ups, and personalized reminders, clinic software elevates the customer experience, creating stronger relationships and higher retention." },
+      { t: "Smarter Billing & Inventory Management", d: "Managing consumables and payments can drain valuable time. Integrated billing and inventory tracking help clinics reduce errors, improve efficiency, and ensure they never run out of essential supplies." },
+      { t: "Data-Driven Growth", d: "With built-in reports and analytics, clinics can track revenue trends, identify popular treatments, and measure staff performance. These insights empower smarter decisions and long-term scalability." },
+      { t: "Scalable & Future-Ready", d: "Whether you're running a single clinic or managing multiple branches, aesthetic clinic software grows with your business. It adapts to changing needs, ensuring long-term sustainability." }
     ]
   }
 };
@@ -2410,8 +2414,8 @@ function WhyBocxySection() {
 function DemosSection() {
   const [open, setOpen] = useState(null);
   const demos = [
-    { key: "salon", title: "Salon & Spa Software", desc: "Watch this short demo video to see how our software simplifies your workflow.", poster: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop", src: "https://www.bocxy.com/video/salon-demo.mp4" },
-    { key: "aesthetic", title: "Aesthetic Clinic Software", desc: "Experience our aesthetic clinic software in action — see how our platform enhances your clinic's efficiency and patient care.", poster: "https://images.unsplash.com/photo-1629909613654-28e377c37b17?q=80&w=1200&auto=format&fit=crop", src: "https://www.bocxy.com/video/aesthetic_video.mp4" }
+    { key: "salon", title: "Experience Our Salon Product in Action", sub: "Salon & Spa Software · Demo", desc: "Watch this short demo video to see how our software simplifies your workflow.", poster: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop", src: "https://www.bocxy.com/video/salon-demo.mp4" },
+    { key: "aesthetic", title: "Clinic Demo Video — Experience Our Aesthetic Clinic Software in Action", sub: "Aesthetic Clinic Software · Demo", desc: "Watch this short demo video to see how our platform enhances your clinic's efficiency and patient care.", poster: "https://images.unsplash.com/photo-1629909613654-28e377c37b17?q=80&w=1200&auto=format&fit=crop", src: "https://www.bocxy.com/video/aesthetic_video.mp4" }
   ];
   return (
     <section className="bg-ink py-24 text-paper md:py-32">
@@ -2435,7 +2439,8 @@ function DemosSection() {
                   </div>
                 </div>
                 <div className="mt-5">
-                  <h3 className="font-serif text-2xl font-medium">{d.title}</h3>
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-clay">{d.sub}</div>
+                  <h3 className="mt-2 font-serif text-2xl font-medium">{d.title}</h3>
                   <p className="mt-2 text-sm text-paper/65">{d.desc}</p>
                 </div>
               </button>
@@ -2456,6 +2461,47 @@ function DemosSection() {
             </div>
           </div>
         )}
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   STANDALONE DEMOS + SUCCESS PAGES (mirror original /demos routes)
+   ============================================================ */
+function DemosPage() {
+  return (
+    <>
+      <section className="relative overflow-hidden bg-paper pt-[120px]">
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-clay/10 blur-3xl"></div>
+        <div className="mx-auto max-w-[1320px] px-6 pb-16 md:px-10 md:pb-20">
+          <Reveal><Eyebrow>Product demos</Eyebrow></Reveal>
+          <Reveal delay={120} big><h1 className="mt-6 max-w-4xl font-serif text-6xl font-light leading-[0.96] tracking-tightest sm:text-8xl">See Bocxy in action.</h1></Reveal>
+          <Reveal delay={240}><p className="mt-8 max-w-2xl font-serif text-xl italic leading-relaxed text-ink/65">Experience our salon and aesthetic clinic software in action — short demo videos showing how Bocxy simplifies your workflow.</p></Reveal>
+        </div>
+      </section>
+      <DemosSection />
+    </>
+  );
+}
+
+function SuccessPage() {
+  return (
+    <section className="bg-paper pt-[160px] pb-24">
+      <div className="mx-auto max-w-2xl px-6 text-center md:px-10">
+        <Reveal>
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-leaf/15">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" className="h-10 w-10 text-leaf"><path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </div>
+        </Reveal>
+        <Reveal delay={120}><h1 className="mt-8 font-serif text-5xl font-light tracking-tighter sm:text-6xl">Thank you for contacting Us!</h1></Reveal>
+        <Reveal delay={240}><p className="mt-5 font-serif text-xl italic text-ink/65">We will contact you soon.</p></Reveal>
+        <Reveal delay={340}>
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <Btn href="#/" variant="dark">Back to home</Btn>
+            <Btn href="#/contact" variant="clay">Book a Free Demo</Btn>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -2503,24 +2549,27 @@ function HomePage() {
 function App() {
   const [route] = useRoute();
   let page = null;
-  if (route === "/products/clinic") page = <ProductShowcase id="clinic" />;
-  else if (route === "/products/salon") page = <ProductShowcase id="salon" />;
-  else if (route === "/products/medspa") page = <ProductShowcase id="medspa" />;
-  else if (route === "/products/derm") page = <ProductShowcase id="derm" />;
-  else if (route === "/products/crm") page = <ProductShowcase id="crm" />;
-  else if (route === "/products/hr") page = <ProductShowcase id="hr" />;
-  else if (route === "/services/ims") page = <SolutionShowcase id="ims" />;
-  else if (route === "/services/erp") page = <SolutionShowcase id="erp" />;
-  else if (route === "/services/custom") page = <SolutionShowcase id="custom" />;
-  else if (route === "/services/future") page = <SolutionShowcase id="future" />;
-  else if (route === "/products" || route === "/products/") page = <ProductsOverview />;
-  else if (route === "/services" || route === "/services/") page = <ServicesOverview />;
-  else if (route === "/about" || route === "/about/") page = <AboutPage />;
-  else if (route === "/journal" || route === "/journal/") page = <JournalPage />;
-  else if (route === "/case-study" || route === "/case-study/") page = <CaseStudyPage />;
-  else if (route === "/careers" || route === "/careers/") page = <CareersPage />;
-  else if (route === "/privacy" || route === "/privacy/") page = <PrivacyPage />;
-  else if (route === "/contact" || route === "/contact/") page = <ContactPage />;
+  const norm = (route || "/").replace(/\/+$/, "") || "/";
+  if (norm === "/products/clinic" || norm === "/products/clinic-software") page = <ProductShowcase id="clinic" />;
+  else if (norm === "/products/salon" || norm === "/products/salon-spa-software") page = <ProductShowcase id="salon" />;
+  else if (norm === "/products/medspa" || norm === "/products/medspa-software") page = <ProductShowcase id="medspa" />;
+  else if (norm === "/products/derm" || norm === "/products/dermatology-clinic-software") page = <ProductShowcase id="derm" />;
+  else if (norm === "/products/crm" || norm === "/products/crm-software") page = <ProductShowcase id="crm" />;
+  else if (norm === "/products/hr" || norm === "/products/hr-and-payroll-software") page = <ProductShowcase id="hr" />;
+  else if (norm === "/services/ims" || norm === "/services/System-integrated-management-system") page = <SolutionShowcase id="ims" />;
+  else if (norm === "/services/erp" || norm === "/services/enterprise-resource-planning") page = <SolutionShowcase id="erp" />;
+  else if (norm === "/services/custom" || norm === "/services/customised-busniess-solutions" || norm === "/services/customised-business-solutions") page = <SolutionShowcase id="custom" />;
+  else if (norm === "/services/future" || norm === "/services/future-of-aesthetic-clinics") page = <SolutionShowcase id="future" />;
+  else if (norm === "/products") page = <ProductsOverview />;
+  else if (norm === "/services") page = <ServicesOverview />;
+  else if (norm === "/about") page = <AboutPage />;
+  else if (norm === "/journal" || norm === "/new-blogs") page = <JournalPage />;
+  else if (norm === "/case-study") page = <CaseStudyPage />;
+  else if (norm === "/careers" || norm === "/carrer") page = <CareersPage />;
+  else if (norm === "/privacy" || norm === "/privacy-policy") page = <PrivacyPage />;
+  else if (norm === "/contact") page = <ContactPage />;
+  else if (norm === "/success") page = <SuccessPage />;
+  else if (norm === "/demos" || norm === "/demo-salon" || norm === "/demo-aesthetic") page = <DemosPage />;
   else page = <HomePage />;
   return (
     <div className="min-h-screen bg-paper font-sans text-ink">
