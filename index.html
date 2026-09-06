@@ -5,9 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bocxy — Beauty appointments, made effortless</title>
 <meta name="description" content="Bocxy — Chennai's premium beauty and wellness marketplace connecting customers with salons, spas and independent beauty professionals. Book appointments instantly and manage your business with Bocxy Partner.">
+<meta name="theme-color" content="#FAF6EF">
+<link rel="canonical" href="https://www.bocxy.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bocxy">
+<meta property="og:title" content="Bocxy — Beauty appointments, made effortless">
+<meta property="og:description" content="Discover Chennai's best salons, spas and beauty professionals. Book in seconds.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bocxy — Beauty appointments, made effortless">
+<meta name="twitter:description" content="Discover Chennai's best salons, spas and beauty professionals. Book in seconds.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23221812'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='34' fill='%23FAF6EF' text-anchor='middle' font-style='italic'%3Eb%3C/text%3E%3Ccircle cx='47' cy='45' r='4' fill='%23C05A33'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop">
 <script src="./vendor/tailwindcss.js"></script>
 <script>
 tailwind.config = {
@@ -42,6 +56,20 @@ tailwind.config = {
   html{scroll-behavior:smooth}
   body{background:#FAF6EF;color:#221812;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   ::selection{background:#C05A33;color:#FAF6EF}
+  :focus-visible{outline:2px solid #C05A33;outline-offset:3px;border-radius:4px}
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background:#F3ECDF}
+  ::-webkit-scrollbar-thumb{background:#C9B99B;border-radius:8px;border:2px solid #F3ECDF}
+  ::-webkit-scrollbar-thumb:hover{background:#C05A33}
+  .skip-link{position:fixed;top:-60px;left:16px;z-index:100;background:#221812;color:#FAF6EF;padding:10px 18px;border-radius:9999px;font-size:13px;font-weight:600;transition:top .3s}
+  .skip-link:focus{top:12px}
+  .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(to right,#C05A33,#E7A87A);z-index:80;transition:width .1s linear}
+  .btn-shine{position:relative;overflow:hidden}
+  .btn-shine::before{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .6s ease}
+  .btn-shine:hover::before{left:130%}
+  .card-ring{box-shadow:0 0 0 1px rgba(34,24,18,.06),0 24px 60px -24px rgba(34,24,18,.18)}
+  .hero-img{filter:saturate(1.05) contrast(1.02)}
+  .eyebrow-num{font-family:Fraunces,Georgia,serif;font-style:italic;color:#C05A33}
   .no-scrollbar::-webkit-scrollbar{display:none}
   .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
   .grain::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -63,7 +91,7 @@ tailwind.config = {
   .step-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.22em;color:#8A7967}
   .tag{font-size:10px;font-weight:500;padding:4px 10px;border-radius:9999px;background:rgba(34,24,18,0.06);color:#372A20}
   @media (max-width:1023px){.step-number{font-size:48px}}
-  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.marquee__inner{animation:none}}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.marquee__inner,.animate-floaty,.animate-floaty2{animation:none}}
 </style>
 </head>
 <body class="grain bg-cream text-espresso">
@@ -164,8 +192,23 @@ function Eyebrow({ children, light = false }) {
   );
 }
 
+function ScrollProgress() {
+  const [w, setW] = useState(0);
+  useEffect(() => {
+    const fn = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      setW(h > 0 ? (window.scrollY / h) * 100 : 0);
+    };
+    fn();
+    window.addEventListener("scroll", fn, { passive: true });
+    window.addEventListener("resize", fn);
+    return () => { window.removeEventListener("scroll", fn); window.removeEventListener("resize", fn); };
+  }, []);
+  return <div className="scroll-progress" style={{ width: w + "%" }} aria-hidden="true"></div>;
+}
+
 function Btn({ href = "#", variant = "clay", children, className = "", onClick }) {
-  const base = "group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-clay/60 active:scale-[0.98]";
+  const base = "btn-shine group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-clay/60 active:scale-[0.98]";
   const variants = {
     clay: "bg-clay text-cream hover:bg-clay-deep shadow-[0_10px_30px_-12px_rgba(192,90,51,0.55)]",
     dark: "bg-espresso text-cream hover:bg-cocoa",
@@ -330,11 +373,11 @@ function Hero() {
       <div className="pointer-events-none absolute -left-52 top-96 h-[420px] w-[420px] rounded-full bg-blush/50 blur-3xl"></div>
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-6 pb-24 pt-14 md:px-10 lg:grid-cols-12 lg:pb-32 lg:pt-20">
         <div className="lg:col-span-6">
-          <Reveal><div className="flex items-center gap-2.5">
+          <Reveal><div className="inline-flex items-center gap-2.5 rounded-full border border-espresso/10 bg-paper/80 py-2 pl-3 pr-4 shadow-sm backdrop-blur">
             <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-leaf opacity-60"></span><span className="relative inline-flex h-2 w-2 rounded-full bg-leaf"></span></span>
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-taupe">Now live in Chennai</span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-taupe">Now live in Chennai · 100+ partners</span>
           </div></Reveal>
-          <Reveal delay={100}><h1 className="mt-6 font-serif text-[44px] font-medium leading-[1.04] tracking-tight sm:text-6xl lg:text-[72px]">
+          <Reveal delay={100}><h1 className="mt-6 font-serif text-[44px] font-medium leading-[1.02] tracking-[-0.02em] sm:text-6xl lg:text-[76px]">
             Beauty appointments,<br /><em className="font-light italic text-clay">made effortless.</em>
           </h1></Reveal>
           <Reveal delay={200}><p className="mt-6 max-w-md text-[17px] leading-relaxed text-espresso/70">
@@ -356,8 +399,8 @@ function Hero() {
         </div>
         <div className="relative lg:col-span-6">
           <div className="relative mx-auto h-[520px] max-w-[560px] sm:h-[600px]">
-            <div className="absolute left-0 top-0 h-[440px] w-[300px] overflow-hidden rounded-t-[150px] rounded-b-3xl shadow-soft sm:h-[500px] sm:w-[340px]">
-              <img src={IMG.heroArch} alt="Hair stylist at work in a Chennai salon" className="h-full w-full object-cover" />
+            <div className="card-ring absolute left-0 top-0 h-[440px] w-[300px] overflow-hidden rounded-t-[150px] rounded-b-3xl shadow-soft sm:h-[500px] sm:w-[340px]">
+              <img src={IMG.heroArch} alt="Hair stylist at work in a Chennai salon" className="hero-img h-full w-full object-cover" fetchpriority="high" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-espresso/30 via-transparent to-transparent"></div>
             </div>
             <div className="absolute right-0 top-16 w-[250px] sm:w-[280px]">
@@ -932,10 +975,10 @@ function FinalCta() {
 /* ---------- 13. FOOTER ---------- */
 function Footer() {
   const cols = [
-    { h: "Discover", links: ["Hair", "Skin", "Nails", "Bridal", "Spa", "Tattoo"] },
-    { h: "For Businesses", links: ["Bocxy Partner", "Business Solutions", "Partner With Us"] },
-    { h: "Company", links: ["About", "Careers", "Contact"] },
-    { h: "Ecosystem", links: ["Bocxy Academy", "Bocxy Tech", "Bocxy Glam"] }
+    { h: "Discover", links: [{ t: "Hair", h: "#explore" }, { t: "Skin", h: "#explore" }, { t: "Nails", h: "#explore" }, { t: "Bridal", h: "#explore" }, { t: "Spa", h: "#explore" }, { t: "Tattoo", h: "#explore" }] },
+    { h: "For Businesses", links: [{ t: "Bocxy Partner", h: "#business" }, { t: "Business Solutions", h: "#business" }, { t: "Partner With Us", h: "#business" }] },
+    { h: "Company", links: [{ t: "About", h: "#about" }, { t: "How it works", h: "#how" }, { t: "Salons", h: "#salons" }] },
+    { h: "Ecosystem", links: [{ t: "Download app", h: "#download" }, { t: "Explore", h: "#explore" }, { t: "Book now", h: "#salons" }] }
   ];
   return (
     <footer className="bg-espresso text-cream">
@@ -958,7 +1001,7 @@ function Footer() {
               <div key={c.h}>
                 <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-cream/40">{c.h}</h3>
                 <ul className="mt-5 space-y-3">
-                  {c.links.map(l => <li key={l}><a href="#top" className="text-sm text-cream/70 transition-colors hover:text-cream">{l}</a></li>)}
+                  {c.links.map(l => <li key={l.t}><a href={l.h} className="text-sm text-cream/70 transition-colors hover:text-cream">{l.t}</a></li>)}
                 </ul>
               </div>
             ))}
@@ -979,8 +1022,8 @@ function Footer() {
 /* ---------- mobile sticky CTA ---------- */
 function MobileCta() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-espresso/10 bg-cream/92 px-4 py-3 backdrop-blur-xl md:hidden">
-      <a href="#salons" className="flex w-full items-center justify-center gap-2 rounded-full bg-clay py-3.5 text-sm font-semibold text-cream shadow-[0_10px_30px_-12px_rgba(192,90,51,0.55)]">Book an Appointment</a>
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-espresso/10 bg-cream/92 px-4 pt-3 backdrop-blur-xl md:hidden" style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}>
+      <a href="#salons" className="btn-shine flex w-full items-center justify-center gap-2 rounded-full bg-clay py-3.5 text-sm font-semibold text-cream shadow-[0_10px_30px_-12px_rgba(192,90,51,0.55)]">Book an Appointment →</a>
     </div>
   );
 }
@@ -989,8 +1032,10 @@ function MobileCta() {
 function BocxySite() {
   return (
     <div className="min-h-screen bg-cream font-sans text-espresso">
+      <a href="#how" className="skip-link">Skip to content</a>
+      <ScrollProgress />
       <Navbar />
-      <main>
+      <main id="main">
         <Hero />
         <TrustStrip />
         <HowItWorks />
