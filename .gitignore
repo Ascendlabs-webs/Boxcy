@@ -1,0 +1,16 @@
+# Bocxy — dependencies & local
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.DS_Store
+Thumbs.db
+.env
+.env.local
+.env.*.local
+*.log
+.vscode/
+.idea/
+dist/
+build/
